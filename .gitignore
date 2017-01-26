@@ -7,4 +7,4 @@ rosalind.prm
 rosalindIndividual.cpp
 rosalindIndividual.hpp
 rosalindIndividual.o
-tests
+greedy/tests

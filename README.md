@@ -16,6 +16,7 @@ To run:
 # Tests / Greedy Algorithm
 To run tests:
 ```bash
+cd greedy
 clang++ -o tests greedy_algorithm.cpp tests.cpp
 ./tests
 ```
