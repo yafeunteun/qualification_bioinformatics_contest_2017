@@ -11,6 +11,8 @@ __________________________________________________________*/
 #include<iterator>
 #include<algorithm>
 
+#define N_READS 50
+
 int SIZE = 0;
 vector<string> READS = vector<string>();
 string DNA = "";
@@ -46,7 +48,12 @@ int is_substring(string& dna, string& read, int start_pos) {
 \end
 
 \Before everything else function:
- ifstream infile("fic.txt");
+if (argc != 2) {
+  cout << "USAGE: ./rosalind FILE" << endl;
+  exit(1);
+}
+
+ifstream infile(argv[1]);
 infile >> DNA;
 infile >> SIZE;
 string line;
@@ -64,6 +71,12 @@ cout << "READS LONGUEUR" << READS.size() << endl;
 for (int i = 0; i < READS.size(); i++) {
   cout << "READ " << i << " " << READS[i] << endl;
 }
+
+if (READS.size() != N_READS) {
+  cout << "\n\nPLEASE EDIT N_READS TO MATCH THE NUMBER OF READS IN FILE: " << READS.size() << endl;
+  exit(1);
+}
+
 \end
 
 \After everything else function:
@@ -80,8 +93,8 @@ for (int i = 0; i < READS.size(); i++) {
 
 \User classes :
 GenomeClass { 
-  int read_positions[100];
-  int solutions[100];
+  int read_positions[N_READS];
+  int solutions[N_READS];
 }
 \end
 
