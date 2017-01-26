@@ -2,7 +2,7 @@
 
 
 nb_reads=`cat $1 | head -n 2 | tail -n 1`
-dna_size=`cat ~/tests/1  | head -n 1 | wc -c`
+dna_size=`cat $1  | head -n 1 | wc -c`
 ##echo $nb_reads
 
 sed -i.bak "s/#define N_READS .*/#define N_READS $nb_reads/"  ./rosalind.ez
