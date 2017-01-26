@@ -26,8 +26,10 @@ float pMutPerGene=0.1;
 \User functions:
 // Returns first position of char `c` in `dna`
 // starting at position `start_pos`. -1 if not found.
-int find_pos(string& dna, char c, int start_pos) {
+// Skip non-coding bits.
+int find_pos(string& dna, int* dna_mask, char c, int start_pos) {
   for (int i = start_pos; i < dna.length(); i++) {
+    if (dna_mask[i] == 0) continue;
     if (dna[i] == c) return i;
   }
   return -1;
@@ -35,10 +37,10 @@ int find_pos(string& dna, char c, int start_pos) {
 
 // Returns position of the last char of `read` in `dna`
 // starting at position `start_pos`. -1 if not found.
-int is_substring(string& dna, string& read, int start_pos) {
+int is_substring(string& dna, int* dna_mask, string& read, int start_pos) {
   int last_pos = -1;
   for (int i = 0; i < read.length(); i++) {
-    int pos = find_pos(dna, read[i], start_pos);
+    int pos = find_pos(dna, dna_mask, read[i], start_pos);
     if (pos == -1) return -1;
     start_pos = pos + 1;
     last_pos = pos;
@@ -137,7 +139,7 @@ for (int i=0;i<DNA_SIZE;i++)
 
   for (int i = 0; i < SIZE; i++) {
     int read_idx = Genome.read_positions[i];
-    int pos = is_substring(DNA, READS[read_idx], cursor);
+    int pos = is_substring(DNA, Genome.coding_bits, READS[read_idx], cursor);
     if (pos == -1) {
       Genome.solutions[i] = -1;
     } else {
