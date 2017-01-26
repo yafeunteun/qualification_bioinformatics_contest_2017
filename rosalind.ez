@@ -86,6 +86,7 @@ GenomeClass {
 \end
 
 \GenomeClass::display:
+cout << "coucouille" << endl;
 \end
 
 \GenomeClass::initialiser : // "initializer" is also accepted
@@ -100,21 +101,30 @@ GenomeClass {
   int nLocus=random(1,SIZE);
 
   for (int i=nLocus;i<SIZE;i++) {
-    child.read_positions[i]=parent2.read_positions[i];
+    child.solutions[i]=parent2.solutions[i];
   }
 
 \end
 
 \GenomeClass::mutator : // Must return a value (for historical reasons)
-
-  for (int i=0;i<(SIZE/2);i++) {
-    if (tossCoin(pMutPerGene)){
-      int temp = Genome.read_positions[i];
-      Genome.read_positions[i] = Genome.read_positions[SIZE-i-1];
-      Genome.read_positions[SIZE-i-1] = temp;
+  int nb_tail = 0;
+  for(int i = 0; i < SIZE; ++i) {
+    if(tossCoin(pMutPerGene)) {
+      nb_tail ++;
     }
   }
-
+  for(int i = 0; i < nb_tail; ++i) {
+    int idx0 = 0;
+    int idx1 = 0;
+    while (idx0 == idx1) {
+      idx0 = random(0, SIZE);
+      idx1 = random(0, SIZE);
+    }
+    int temp = Genome.read_positions[idx0];
+    Genome.read_positions[idx0] = Genome.read_positions[idx1];
+    Genome.read_positions[idx1] = temp;
+  }
+  
   return 3;
 \end
 
