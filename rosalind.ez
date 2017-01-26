@@ -12,7 +12,9 @@ __________________________________________________________*/
 #include<algorithm>
 #include "assert.h"
 
-#define N_READS 50
+#define N_READS 7
+#define DNA_SIZE 8
+
 
 int SIZE = 0;
 vector<string> READS = vector<string>();
@@ -96,6 +98,7 @@ if (READS.size() != N_READS) {
 GenomeClass { 
   int read_positions[N_READS];
   int solutions[N_READS];
+  int coding_bits[DNA_SIZE];
 }
 \end
 
@@ -108,38 +111,24 @@ cout << "coucouille" << endl;
     Genome.read_positions[i] = i;
   }
   random_shuffle(begin(Genome.read_positions), end(Genome.read_positions));
+  for(int i=0; i<DNA_SIZE; i++ )
+     	Genome.coding_bits[i] = random(0,2);
 \end
 
 \GenomeClass::crossover :
 
-  int nLocus=random(1,SIZE);
+ int nLocus=random(1,DNA_SIZE);
 
-  for (int i=nLocus;i<SIZE;i++) {
-    child.solutions[i]=parent2.solutions[i];
-  }
-
+  for (int i=nLocus;i<DNA_SIZE;i++)
+     child.coding_bits[i]=parent2.coding_bits[i];
 \end
 
 \GenomeClass::mutator : // Must return a value (for historical reasons)
-  int nb_tail = 0;
-  for(int i = 0; i < SIZE; ++i) {
-    if(tossCoin(pMutPerGene)) {
-      nb_tail ++;
-    }
-  }
-  for(int i = 0; i < nb_tail; ++i) {
-    int idx0 = 0;
-    int idx1 = 0;
-    while (idx0 == idx1) {
-      idx0 = random(0, SIZE);
-      idx1 = random(0, SIZE);
-    }
-    int temp = Genome.read_positions[idx0];
-    Genome.read_positions[idx0] = Genome.read_positions[idx1];
-    Genome.read_positions[idx1] = temp;
-  }
-  
+for (int i=0;i<DNA_SIZE;i++)
+    if (tossCoin(pMutPerGene)) Genome.coding_bits[i]=(Genome.coding_bits[i]+1)%2;
   return 3;
+
+
 \end
 
 \GenomeClass::evaluator : // Returns the score
