@@ -166,7 +166,7 @@ CXXFLAGS+=-std=c++11
   Reduce offspring operator: Tournament 2
   Final reduce operator: Tournament 2
 
-  Elitism: Strong			              // Weak or Strong
+  Elitism: Strong                   // Weak or Strong
   Elite: 1
   Print stats: true
   Generate csv stats file: false			
@@ -175,7 +175,7 @@ CXXFLAGS+=-std=c++11
   Plot stats: false
 
   Remote island model: false
-  IP file: ip.txt 			            // File containing all the remote island's IP
+  IP file: ip.txt                   // File containing all the remote island's IP
   Server port : 2929
   Migration probability: 0.3
 
