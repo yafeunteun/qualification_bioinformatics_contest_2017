@@ -2,6 +2,7 @@
 
 # GA
 To prepare input files:
+**(Files in inputs/ are already cleaned)**
 ```bash
 apt install dos2unix
 dos2unix FILES
