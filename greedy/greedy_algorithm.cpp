@@ -50,6 +50,7 @@ void load_problem(string path, string& dna_out, vector<string>& reads_out) {
 
 void greedy_algorithm(string& dna, vector<string>& reads, vector<string>& result) {
   int cursor = 0;
+  result.clear();
 
   for (int i = 0; i < reads.size(); i++) {
     int pos = is_substring(dna, reads[i], cursor);
