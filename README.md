@@ -7,6 +7,12 @@ apt install dos2unix
 dos2unix FILES
 ```
 
+To run:
+```bash
+./pi.sh rosalind.ez
+./rosalind FILE
+```
+
 # Tests / Greedy Algorithm
 To run tests:
 ```bash
