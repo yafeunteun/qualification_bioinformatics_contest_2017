@@ -28,3 +28,11 @@ Expected output:
 -> Score: 2
 -> Output sequence: ACGT
 ```
+
+
+# Use Write submission
+After having run GA:
+```bash
+sh write_solution.sh TEST_FILE_USED
+```
+The solution is formatted in submit.txt
