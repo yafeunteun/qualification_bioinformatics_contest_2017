@@ -1,6 +1,8 @@
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include <string>
+#include "assert.h"
 #include "greedy_algorithm.hpp"
 
 using namespace std;
@@ -25,6 +27,25 @@ int is_substring(string& dna, string& read, int start_pos) {
     last_pos = pos;
   }
   return last_pos;
+}
+
+void load_problem(string path, string& dna_out, vector<string>& reads_out) {
+  ifstream infile(path);
+  string line;
+  int size = 0;
+
+  reads_out.clear();
+
+  infile >> dna_out;
+  infile >> size;
+  
+  while(getline(infile, line)) {
+    if (line.length() > 0) {
+      reads_out.push_back(line);
+    }
+  }
+
+  assert(reads_out.size() == size);  
 }
 
 void greedy_algorithm(string& dna, vector<string>& reads, vector<string>& result) {

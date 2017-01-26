@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <sstream>
 #include <iterator>
 #include <algorithm>
 #include "assert.h"
@@ -9,9 +10,16 @@
 
 using namespace std;
 
+struct compare {
+    bool operator()(const string& first, const string& second) {
+        return first.size() < second.size();
+    }
+};
+
 int main (int argc, char **argv) {
     string dna = string("TAGCGCGT");
     string read;
+    compare c;
     int pos;
 
     cout << "* Test is_substring()" << endl;
@@ -65,5 +73,15 @@ int main (int argc, char **argv) {
     }
     cout << endl;
 
+    for (int i = 1; i <= 10; i++) {
+        ostringstream oss;
+        oss << i;
+        string path = "../inputs/" + oss.str();
+        cout << "* Running greedy algorithm on " << path << endl;
+        load_problem(path, dna, reads);
+        sort(reads.begin(), reads.end(), c);
+        greedy_algorithm(dna, reads, result);
+        cout << "-> Score: " << result.size() << endl;
+    }
     return 0;
 }
