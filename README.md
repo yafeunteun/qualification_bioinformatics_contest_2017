@@ -9,9 +9,7 @@ dos2unix FILES
 
 To run:
 ```bash
-# Edit N_READS
-./pi.sh rosalind.ez
-./rosalind FILE
+./mu.sh FILE
 ```
 
 # Tests / Greedy Algorithm
