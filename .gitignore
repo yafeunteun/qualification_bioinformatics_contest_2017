@@ -1,0 +1,10 @@
+Makefile
+rosalind
+rosalind.cpp
+rosalind.mak
+rosalind.o
+rosalind.prm
+rosalindIndividual.cpp
+rosalindIndividual.hpp
+rosalindIndividual.o
+tests
