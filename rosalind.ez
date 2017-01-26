@@ -10,6 +10,7 @@ __________________________________________________________*/
 #include<string>
 #include<iterator>
 #include<algorithm>
+#include "assert.h"
 
 #define N_READS 50
 
@@ -58,12 +59,12 @@ infile >> DNA;
 infile >> SIZE;
 string line;
 while ( getline(infile, line)) {
-//  line.pop_back();
-  READS.push_back(line);
+  if (line.length() > 0) {
+    READS.push_back(line);
+  }
 }
 
-READS.erase(READS.begin());
-
+assert(READS.size() == SIZE);
 
 cout << "DNA <- " << DNA << endl;
 cout << "SIZE <- " << SIZE << endl;
