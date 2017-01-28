@@ -12,8 +12,8 @@ __________________________________________________________*/
 #include<algorithm>
 #include "assert.h"
 
-#define N_READS 7
-#define DNA_SIZE 7216
+#define N_READS 5
+#define DNA_SIZE 69
 
 
 int SIZE = 0;
@@ -207,9 +207,9 @@ cout << "coucouille" << endl;
 //  random_shuffle(begin(Genome.orders), end(Genome.orders));
 
   for(int i = 0; i < N_READS; i++){
-    randomly_selected_interval_idx = random(0, MATRIX[i].length());
-    Genome.intervals[2*i] = MATRIX[i][randomly_selected_interval_idx].first;
-    Genome.intervals[(2*i)+1] = MATRIX[i][randomly_selected_interval_idx].second;
+    andomly _selected_interval_idx = random(0, MATRIX[i].length());
+    Genome.intervals[2*i] = MATRIX[i][andomly_selected_interval_idx].first;
+    Genome.intervals[(2*i)+1] = MATRIX[i][andomly_selected_interval_idx].second;
   }
 
 \end
@@ -227,9 +227,9 @@ cout << "coucouille" << endl;
 
   for (int i = 0; i < SIZE; ++i) {
     if (tossCoin(pMutPerGene)) {
-      randomly_selected_interval_idx = random(0, MATRIX[i].length());
-      Genome.intervals[2*i] = MATRIX[i][randomly_selected_interval_idx].first;
-      Genome.intervals[(2*i)+1] = MATRIX[i][randomly_selected_interval_idx].second;
+      andomly_selected_interval_idx = random(0, MATRIX[i].length());
+      Genome.intervals[2*i] = MATRIX[i][andomly_selected_interval_idx].first;
+      Genome.intervals[(2*i)+1] = MATRIX[i][andomly_selected_interval_idx].second;
     } 
   }
 
