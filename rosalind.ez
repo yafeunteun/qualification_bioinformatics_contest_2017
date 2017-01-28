@@ -185,9 +185,6 @@ cout << "coucouille" << endl;
     Genome.intervals[2*i] = MATRIX[i][randomly_selected_interval_idx].first;
     Genome.intervals[(2*i)+1] = MATRIX[i][randomly_selected_interval_idx].second;
   }
-    
-    
-
 
 \end
 
