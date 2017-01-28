@@ -176,11 +176,11 @@ cout << "coucouille" << endl;
 
 \GenomeClass::initialiser : // "initializer" is also accepted
   for(int i=0; i<SIZE; i++ ) {
-    Genome.read_positions[i] = i;
+    Genome.orders[i] = i;
   }
   random_shuffle(begin(Genome.read_positions), end(Genome.read_positions));
-  for(int i=0; i<DNA_SIZE; i++ )
-     	Genome.coding_bits[i] = random(0,2);
+  for(int i=0; i<2*SIZE; i++ )
+     	Genome.intervals[i] = random(0,DNA_SIZE);
 \end
 
 \GenomeClass::crossover :
