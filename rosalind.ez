@@ -12,8 +12,8 @@ __________________________________________________________*/
 #include<algorithm>
 #include "assert.h"
 
-#define N_READS 7
-#define DNA_SIZE 8
+#define N_READS 1000
+#define DNA_SIZE 1091921
 
 
 int SIZE = 0;
@@ -24,6 +24,34 @@ float pMutPerGene=0.1;
 \end
 
 \User functions:
+
+// Check if in an array describing start and end positions,
+// The overlaps are correct regarding of our problem
+/ return true if the overlaps are valids and false else.
+// IMPORTANT: in our case `size` must be set to 2*SIZE
+bool check_overlaps(int** tab, int size){
+  for (int i = 2; i < size; i+=2) {
+    if (!(tab[i-2] < tab[i] and tab[i] < tab[i-1])) {
+      if (!(tab[i] > tab[i-1])){
+        return false;
+      }
+    }
+  } // end for
+  for (int i = 1; i < 2*SIZE -1; i+=2) {
+    if (!(tab[i+1] < tab[i] and tab[i] < tab[i+2])){
+      if (!(tab[i] < tab[i+1])){
+        return false;
+      }
+    }
+  } // end for
+  for (int i = 1; i < 2*SIZE; i+=2) {
+    if (tab[i-1] >= tab[i]) {
+      return false;
+    }
+  } // end for
+  return true;
+} //end check_overlaps
+
 // Returns first position of char `c` in `dna`
 // starting at position `start_pos`. -1 if not found.
 // Skip non-coding bits.
@@ -145,7 +173,7 @@ for (int i=0;i<DNA_SIZE;i++)
     } else {
       fScore++;
       Genome.solutions[i] = 1;
-      cursor = pos + 1;
+//      cursor = pos + 1;
     }
   }
 
@@ -157,9 +185,9 @@ CXXFLAGS+=-std=c++11
 \end
 
 \Default run parameters :           // Please let the parameters appear in this order
-  Number of generations : 10000     // NB_GEN
+  Number of generations : 100     // NB_GEN
   Time limit: 0                     // In seconds, 0 to deactivate
-  Population size : 1000            // POP_SIZE
+  Population size : 100            // POP_SIZE
   Offspring size : 100              // 40% 
   Mutation probability : 1          // MUT_PROB
   Crossover probability : 0.2       // XOVER_PROB
