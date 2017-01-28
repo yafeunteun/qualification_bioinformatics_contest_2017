@@ -12,8 +12,8 @@ __________________________________________________________*/
 #include<algorithm>
 #include "assert.h"
 
-#define N_READS 1000
-#define DNA_SIZE 1091921
+#define N_READS 5
+#define DNA_SIZE 69
 
 
 int SIZE = 0;
@@ -27,9 +27,9 @@ float pMutPerGene=0.1;
 
 // Check if in an array describing start and end positions,
 // The overlaps are correct regarding of our problem
-/ return true if the overlaps are valids and false else.
+// return true if the overlaps are valids and false else.
 // IMPORTANT: in our case `size` must be set to 2*SIZE
-bool check_overlaps(int** tab, int size){
+bool check_overlaps(int* tab, int size){
   for (int i = 2; i < size; i+=2) {
     if (!(tab[i-2] < tab[i] and tab[i] < tab[i-1])) {
       if (!(tab[i] > tab[i-1])){
@@ -73,8 +73,8 @@ bool is_read_in_interval(string s, string t, int start, int end){
   if (s.length() < t.length()) {
     return false;
   }
-  for (int i = start; i < end + 1) {
-    if (s[i] == t[cursor_t) {
+  for (int i = start; i < end + 1; ++i) {
+    if (s[i] == t[cursor_t]) {
       cursor_t++;
       matches++;
     }
@@ -178,7 +178,7 @@ cout << "coucouille" << endl;
   for(int i=0; i<SIZE; i++ ) {
     Genome.orders[i] = i;
   }
-  random_shuffle(begin(Genome.read_positions), end(Genome.read_positions));
+  random_shuffle(begin(Genome.orders), end(Genome.orders));
   for(int i=0; i<2*SIZE; i++ )
      	Genome.intervals[i] = random(0,DNA_SIZE);
 \end
@@ -197,16 +197,17 @@ cout << "coucouille" << endl;
   for (int i = 0; i < SIZE; ++i) {
     if (tossCoin(pMutPerGene)) {
       if(tossCoin(0.5)) { // on the right 
-        temp = Genome.orders[(i+1)%SIZE]
-        Genome.orders[(i+1)%SIZE] = Genome.orders[i]
+        int temp = Genome.orders[(i+1)%SIZE];
+        Genome.orders[(i+1)%SIZE] = Genome.orders[i];
 	Genome.orders[i] = temp;
       } else { // on the left
+        int dest_idx = 0;
         if (i == 0) {
-	  int dest_idx = SIZE - 1;
+	  dest_idx = SIZE - 1;
 	} else {
-	  int dest_idx = i - 1;
+	  dest_idx = i - 1;
 	}
-	temp = Genome.orders[dest_idx];
+	int temp = Genome.orders[dest_idx];
 	Genome.orders[dest_idx] = Genome.orders[i];
 	Genome.orders[i] = temp;
      }
@@ -222,12 +223,12 @@ cout << "coucouille" << endl;
 \GenomeClass::evaluator : // Returns the score
   float fScore = 0;
 
-  if (!check_overlaps(Genome.intervals)){
+  if (!check_overlaps(Genome.intervals, 2*SIZE)){
     return -1000;
   }
 
-  for (int i = 0; i < NB_READS; ++i) {
-    if (is_read_in_interval(DNA, READS[Genome.order[i]], Genome.intervals[2*i]; Genome.intervals[(2*i)+1])) {
+  for (int i = 0; i < N_READS; ++i) {
+    if (is_read_in_interval(DNA, READS[Genome.orders[i]], Genome.intervals[2*i], Genome.intervals[(2*i)+1])) {
       fScore += 1;
     }
   }
