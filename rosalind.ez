@@ -162,9 +162,11 @@ if (READS.size() != N_READS) {
 
 \User classes :
 GenomeClass { 
-  int read_positions[N_READS];
-  int solutions[N_READS];
-  int coding_bits[DNA_SIZE];
+//  int read_positions[N_READS];
+//  int solutions[N_READS];
+//  int coding_bits[DNA_SIZE];
+  int orders[N_READS];
+  int intervals[2*N_READS];
 }
 \end
 
