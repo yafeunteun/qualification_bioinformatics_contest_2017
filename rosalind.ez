@@ -12,8 +12,8 @@ __________________________________________________________*/
 #include<algorithm>
 #include "assert.h"
 
-#define N_READS 100
-#define DNA_SIZE 103345
+#define N_READS 7
+#define DNA_SIZE 7216
 
 
 int SIZE = 0;
@@ -181,6 +181,7 @@ for (int j = 0; j < READS.size(); j++) {
     }
   }
 
+  pairs.push_back(pair<int, int>(0,0));
   cout << pairs.size() << " pairs for read " << j << endl;
   MATRIX.push_back(pairs);
 }
@@ -276,17 +277,60 @@ cout << "coucouille" << endl;
 
   copy(ord.begin(), ord.end(), Genome.orders);
 
+  // Check introns/exons
+  bool mask[DNA.length()];
+  
+  // Init mask, true if coding (exons),
+  // false if not coding (introns) 
+  for (int i = 0; i < DNA.length(); i++) { mask[i] = true; }
+  
+  // Iterate through reads in order and mark
+  // not used parts as introns.
+  // Reduce score if a read use an intron.
+  for (int i = 0; i < N_READS; i++) {
+    int start_pos = Genome.intervals[2*Genome.orders[i]];
+    int end_pos = Genome.intervals[2*Genome.orders[i]+1];
+    string read = READS[ord[i]];
+    int cursor = 0;    
 
-  return check_overlaps(&to_eval[0], 2*SIZE); 
+    for (int j = start_pos; j <= end_pos; j++) {
+      if (start_pos == end_pos) continue;
 
+      if (DNA[j] == read[cursor] && mask[j] == false) {
+        // If this position has been marked as an intron
+        // by a previous read
+        // cout << "Intron used by " << read << " on char " << read[cursor] << " on DNA position " << j << endl;
+        
+        fScore--;
+        cursor++;
+      }
+      else if (DNA[j] == read[cursor]) {
+        // If this position is used by the current read
+        cursor++;
+      } else {
+        // If this position is not used by the current read
+        mask[j] = false;
+      }
+    }
+  }
+
+  fScore += check_overlaps(&to_eval[0], 2*SIZE); 
+
+  return fScore;
 /*
     vector<int> ord = sort_indexes(to_sort);
     Genome.orders = ord;
-    
+//    string complete_read = ""; 
     for(int i = 0; i < N_READS; ++i) {
       to_eval[2*i] = Genome.intervals[ord[i]];
       to_eval[2*i+1] = Genome.intervals[ord[i]+1];
+//      complete_read += READS[order[i]];
      }
+     
+//     if(!is_substring(DNA, complete_read, 0) {
+//       return -1000;
+//     }
+
 */
 \end
 
@@ -295,9 +339,9 @@ CXXFLAGS+=-std=c++11
 \end
 
 \Default run parameters :           // Please let the parameters appear in this order
-  Number of generations : 100000     // NB_GEN
+  Number of generations : 1000     // NB_GEN
   Time limit: 0                     // In seconds, 0 to deactivate
-  Population size : 10000          // POP_SIZE
+  Population size : 100000          // POP_SIZE
   Offspring size :  10000              // 40% 
   Mutation probability : 1          // MUT_PROB
   Crossover probability : 0.2        // XOVER_PROB
