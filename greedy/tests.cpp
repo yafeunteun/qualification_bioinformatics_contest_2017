@@ -83,5 +83,36 @@ int main (int argc, char **argv) {
         greedy_algorithm(dna, reads, result);
         cout << "-> Score: " << result.size() << endl;
     }
+
+    // Matrix computation
+    load_problem("../inputs/1", dna, reads);
+    
+    vector< vector< pair<int, int> > > MATRIX = vector< vector< pair<int, int> > >();
+    
+    for (int j = 0; j < reads.size(); j++) {
+        cout << "Processing read " << j << endl;
+        vector< pair<int, int> > pairs = vector< pair<int, int> >();
+        string read = reads[j];
+
+        for (int k = 0; k < dna.length(); k++) {
+            // Skip if the current position in the DNA
+            // doesn't match the first letter of the read
+            if (dna[k] != read[0]) continue;
+
+            // Search if the string is a substring in DNA
+            // and get the last_pos (if any)
+            int start_pos = k;
+            int end_pos = is_substring(dna, read, k);
+
+            if (end_pos != -1) {
+                // cout << "S:" << start_pos << " E:" << end_pos << " " << read << endl;
+                pairs.push_back(pair<int, int>(start_pos, end_pos));
+            }
+        }
+
+        cout << pairs.size() << " pairs for read " << j << endl;
+        MATRIX.push_back(pairs);
+    }
+
     return 0;
 }
