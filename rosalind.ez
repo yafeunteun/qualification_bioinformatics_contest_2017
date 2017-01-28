@@ -52,6 +52,42 @@ bool check_overlaps(int** tab, int size){
   return true;
 } //end check_overlaps
 
+
+// Check if a read can be derived of the portion of a dna string
+// @param s: the dna string
+// @param t: the read string
+// @param start: the starting index of the portion in the dna string (inclusive)
+// @param end: the ending indix of the postion in the dna string (inclusive)
+bool is_read_in_interval(string s, string t, int start, int end){
+  int matches = 0;
+  int cursor_t = 0;
+  if(start >= end){
+    return false;
+  }
+  if (start < 0) {
+   return false;
+  }
+  if (end > s.length()-1) {
+    return false;
+  }
+  if (s.length() < t.length()) {
+    return false;
+  }
+  for (int i = start; i < end + 1) {
+    if (s[i] == t[cursor_t) {
+      cursor_t++;
+      matches++;
+    }
+    if(matches == t.length()) {
+      return true;
+    }
+  }
+  return false;
+} //end is_read_in_interval
+
+
+
+
 // Returns first position of char `c` in `dna`
 // starting at position `start_pos`. -1 if not found.
 // Skip non-coding bits.
