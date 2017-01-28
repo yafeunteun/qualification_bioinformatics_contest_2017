@@ -192,8 +192,28 @@ cout << "coucouille" << endl;
 \end
 
 \GenomeClass::mutator : // Must return a value (for historical reasons)
-for (int i=0;i<DNA_SIZE;i++)
-    if (tossCoin(pMutPerGene)) Genome.coding_bits[i]=(Genome.coding_bits[i]+1)%2;
+ 
+
+  for (int i = 0; i < SIZE; ++i) {
+    if (tossCoin(pMutPerGene)) {
+      if(tossCoin(0.5)) { // on the right 
+        temp = Genome.orders[(i+1)%SIZE]
+        Genome.orders[(i+1)%SIZE] = Genome.orders[i]
+	Genome.orders[i] = temp;
+      } else { // on the left
+        if (i == 0) {
+	  int dest_idx = SIZE - 1;
+	} else {
+	  int dest_idx = i - 1;
+	}
+	temp = Genome.orders[dest_idx];
+	Genome.orders[dest_idx] = Genome.orders[i];
+	Genome.orders[i] = temp;
+     }
+   }
+ 
+
+
   return 3;
 
 
