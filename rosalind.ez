@@ -17,8 +17,9 @@ __________________________________________________________*/
 
 
 int SIZE = 0;
-vector<string> READS = vector<string>();
 string DNA = "";
+vector<string> READS = vector<string>();
+vector< vector< pair<int, int> > > MATRIX = vector< vector< pair<int, int> > >();
 
 float pMutPerGene=0.1;
 \end
@@ -144,6 +145,31 @@ for (int i = 0; i < READS.size(); i++) {
 if (READS.size() != N_READS) {
   cout << "\n\nPLEASE EDIT N_READS TO MATCH THE NUMBER OF READS IN FILE: " << READS.size() << endl;
   exit(1);
+}
+
+for (int j = 0; j < READS.size(); j++) {
+  cout << "Processing read " << j << endl;
+  vector< pair<int, int> > pairs = vector< pair<int, int> >();
+  string read = READS[j];
+
+  for (int k = 0; k < DNA.length(); k++) {
+    // Skip if the current position in the DNA
+    // doesn't match the first letter of the read
+    if (dna[k] != read[0]) continue;
+
+    // Search if the string is a substring in DNA
+    // and get the last_pos (if any)
+    int start_pos = k;
+    int end_pos = is_substring(DNA, read, k);
+
+    if (end_pos != -1) {
+      // cout << "S:" << start_pos << " E:" << end_pos << " " << read << endl;
+      pairs.push_back(pair<int, int>(start_pos, end_pos));
+    }
+  }
+
+  cout << pairs.size() << " pairs for read " << j << endl;
+  MATRIX.push_back(pairs);
 }
 
 \end
