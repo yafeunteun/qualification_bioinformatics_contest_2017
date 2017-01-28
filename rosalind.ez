@@ -185,10 +185,10 @@ cout << "coucouille" << endl;
 
 \GenomeClass::crossover :
 
- int nLocus=random(1,DNA_SIZE);
+ int nLocus=random(1,2*SIZE);
 
-  for (int i=nLocus;i<DNA_SIZE;i++)
-     child.coding_bits[i]=parent2.coding_bits[i];
+  for (int i=nLocus;i<2*SIZE;i++)
+     child.intervals[i]=parent2.intervals[i];
 \end
 
 \GenomeClass::mutator : // Must return a value (for historical reasons)
