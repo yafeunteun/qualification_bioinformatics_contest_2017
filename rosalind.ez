@@ -213,7 +213,7 @@ cout << "coucouille" << endl;
      }
    }
  
-
+  }
 
   return 3;
 
@@ -224,7 +224,8 @@ cout << "coucouille" << endl;
   float fScore = 0;
 
   if (!check_overlaps(Genome.intervals, 2*SIZE)){
-    return -1000;
+    fScore = -10000;
+    return fScore;
   }
 
   for (int i = 0; i < N_READS; ++i) {
