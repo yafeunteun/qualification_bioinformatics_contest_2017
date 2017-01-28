@@ -1,3 +1,23 @@
+#+PROPERTY: header-args :session *my_python_sessio$|1 5 4 6
+#+PROPERTY: header-args+ :results output 
+#+PROPERTY: header-args+ :tangle yes
+
+#+BEGIN_SRC sh
+#!/bin/bash
+
+
+best=`tail -n 1 rosalind.pop`
+echo $best > result.mordor
+cat $1 | tail -n $((`cat $1 | wc -l`-2)) >> result.mordor
+`whereis python  | cut -d " " -f 2`   write_solution.py > submit.txt
+
+
+#+END_SRC
+
+#+RESULTS:
+
+#+BEGIN_SRC python
+
 
 f = open('result.mordor')
 values = [ int(x) for x  in f.readline().split(" ") ]
@@ -42,3 +62,15 @@ print( "".join(solution_as_array))
 
 for index in solution_indices:
   print (index)
+#+END_SRC
+
+#+RESULTS:
+: 
+: >>> >>> >>> >>> >>> >>> >>> >>> ... ... ... >>> >>> >>> >>> >>> [60, 65, 2, 17, 51, 66, 20, 46, 32, 55]
+: ... ... >>> >>> >>> >>> >>> >>> ... ... ... ... ... ... ... ... ... ... ... ... >>> ... ... AGGCTGGGGCTGGGCCTTTTCTGCCTTTTCTTGTACTTTTTTCTTTTT
+: >>> ... ... 43
+: 1
+: 34
+: 8
+: 23
+
