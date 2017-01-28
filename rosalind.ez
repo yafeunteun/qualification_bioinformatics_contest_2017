@@ -221,19 +221,18 @@ cout << "coucouille" << endl;
 
 \GenomeClass::evaluator : // Returns the score
   float fScore = 0;
-  int cursor = 0;
 
-  for (int i = 0; i < SIZE; i++) {
-    int read_idx = Genome.read_positions[i];
-    int pos = is_substring(DNA, Genome.coding_bits, READS[read_idx], cursor);
-    if (pos == -1) {
-      Genome.solutions[i] = -1;
-    } else {
-      fScore++;
-      Genome.solutions[i] = 1;
-//      cursor = pos + 1;
+  if (!check_overlaps(Genome.intervals)){
+    return -1000;
+  }
+
+  for (int i = 0; i < NB_READS; ++i) {
+    if (is_read_in_interval(DNA, READS[Genome.order[i]], Genome.intervals[2*i]; Genome.intervals[(2*i)+1])) {
+      fScore += 1;
     }
   }
+
+
 
   return fScore;
 \end
