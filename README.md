@@ -1,4 +1,7 @@
 # qualification_bioinformatics_contest_2017
+# STATUS : CLOSED
+This project is left unfinished since the contest has ended.
+
 
 # GA
 To prepare input files:
